@@ -152,5 +152,4 @@ function sendEmail($to,$subject,$body)
 {
     $header = "hellow brother , we accept you to join to our company";
     mail($to, $subject, $body, $header);
-    echo "successfully , send email";
 }

@@ -5,14 +5,14 @@ $username = filterRequest('username');
 $email = filterRequest('email');
 $phone = filterRequest('phone');
 $password = sha1('password');
-$verifycode = filterRequest('verifycode');
+$verifycode = rand(10000,99999);
 
 
 $statment = $con->prepare("SELECT * FROM `users` WHERE `users_phone`= ? OR `users_email`= ?");
-$statment->execute([$password,$email]);
+$statment->execute([$phone,$email]);
 $count = $statment->rowCount();
 if($count>0){
-    printFailure("email of phone already exists");
+    printFailure("email or phone already exists");
 }else{
     $data =array(
         "users_name"=>$username,
@@ -22,4 +22,5 @@ if($count>0){
         "users_verifycode"=>$verifycode
     );
     insertData("users",$data);
+    sendEmail($email,"Verify Code Ecommerce","verify code is '$verifycode'");
 }
