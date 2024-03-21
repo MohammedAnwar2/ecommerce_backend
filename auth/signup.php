@@ -4,7 +4,7 @@ include "../connect.php";
 $username = filterRequest('username');
 $email = filterRequest('email');
 $phone = filterRequest('phone');
-$password = filterRequest('password');
+$password = sha1('password');
 $verifycode = filterRequest('verifycode');
 
 
