@@ -140,9 +140,17 @@ function checkAuthenticate()
     } else {
         exit;
     }
-  // End 
+    // End 
 }
 
-function printFailure($message="none"){
-    echo json_encode(["status"=>"failure","message"=>$message]);
+function printFailure($message = "none")
+{
+    echo json_encode(["status" => "failure", "message" => $message]);
+}
+
+function sendEmail($to,$subject,$body)
+{
+    $header = "hellow brother , we accept you to join to our company";
+    mail($to, $subject, $body, $header);
+    echo "successfully , send email";
 }
