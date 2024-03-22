@@ -10,7 +10,7 @@ $statment->execute([$email, $password]);
 $count = $statment->rowCount();
 
 if ($count > 0) {
-    echo json_encode(["status" => "success"]);
+    printSuccess();
 } else {
     $statment = $con->prepare("SELECT * FROM `users` WHERE `users_email` = ? AND `users_password` = ? ");
     $statment->execute([$email, $password]);

@@ -147,10 +147,10 @@ function printFailure($message = "none")
 {
     echo json_encode(["status" => "failure", "message" => $message]);
 }
-// function printSuccess($message = "none")
-// {
-//     echo json_encode(["status" => "success", "data" => $message]);
-// }
+function printSuccess($message = "none")
+{
+    echo json_encode(["status" => "success", "data" => $message]);
+}
 
 // function result($cout,$successData="nono",$failureMessage="nono"){
 //     if($cout>0){
