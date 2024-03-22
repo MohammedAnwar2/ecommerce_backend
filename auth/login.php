@@ -33,21 +33,5 @@ if ($count > 0) {
 // if ($count > 0) {
 //     echo json_encode(["status" => "success"]);
 // } else {
-//     $statment = $con->prepare("SELECT * FROM `users` WHERE `users_email` = ? AND `users_password` = ? ");
-//     $statment->execute([$email, $password]);
-//     $count = $statment->rowCount();
-//     if ($count > 0) {
-//         printFailure("You Forget To Enter The Verify Code In Sign Up Page");
-//     }else{
-//         $statment = $con->prepare("SELECT * FROM `users` WHERE `users_email` = ?");
-//         $statment->execute([$email]);
-//         $count = $statment->rowCount();
-//         if ($count > 0) {
-//             printFailure("Password Not Valid");
-//         }else{
-//             printFailure("Email Not Valid");
-//         }
-//     }
+//     printFailure("Email OR Phone Not Exists");
 // }
-
-//printFailure("Email OR Phone Not Exists");
