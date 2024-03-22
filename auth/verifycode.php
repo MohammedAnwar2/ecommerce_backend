@@ -11,5 +11,5 @@ if ($count > 0) {
     );
     updateData("users",$data,"`users_email`='$email'");
 } else {
-    printFailure("verify code not correct");
+    printFailure("Verify Code Not Correct");
 }

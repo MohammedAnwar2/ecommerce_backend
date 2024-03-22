@@ -147,7 +147,18 @@ function printFailure($message = "none")
 {
     echo json_encode(["status" => "failure", "message" => $message]);
 }
+// function printSuccess($message = "none")
+// {
+//     echo json_encode(["status" => "success", "data" => $message]);
+// }
 
+// function result($cout,$successData="nono",$failureMessage="nono"){
+//     if($cout>0){
+//         printSuccess($successData);
+//     }else{
+//         printFailure($failureMessage);
+//     }
+// }
 function sendEmail($to,$subject,$body)
 {
     $header = "hellow brother , we accept you to join to our company";
