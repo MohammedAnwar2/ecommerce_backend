@@ -11,8 +11,9 @@ $verifycode = rand(10000,99999);
 $statment = $con->prepare("SELECT * FROM `users` WHERE `users_phone`= ? OR `users_email`= ?");
 $statment->execute([$phone,$email]);
 $count = $statment->rowCount();
+$data = $statment->fetch(PDO::FETCH_DEFAULT);
 if($count>0){
-    printFailure("email or phone already exists");
+    printFailure();
 }else{
     $data =array(
         "users_name"=>$username,

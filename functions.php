@@ -147,9 +147,9 @@ function printFailure($message = "none")
 {
     echo json_encode(["status" => "failure", "message" => $message]);
 }
-function printSuccess($message = "none")
+function printSuccess($data = "none")
 {
-    echo json_encode(["status" => "success", "data" => $message]);
+    echo json_encode(["status" => "success", "data" => $data]);
 }
 
 // function result($cout,$successData="nono",$failureMessage="nono"){
@@ -163,4 +163,23 @@ function sendEmail($to,$subject,$body)
 {
     $header = "hellow brother , we accept you to join to our company";
     mail($to, $subject, $body, $header);
+}
+
+function getData($table, $where = null, $values = null, $json = true)   
+{
+    global $con;
+    $data = array();
+    $stmt = $con->prepare("SELECT  * FROM $table WHERE   $where ");
+    $stmt->execute($values);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $count  = $stmt->rowCount();
+    if ($json == true) {
+        if ($count > 0) {
+            echo json_encode(array("status" => "success", "data" => $data));
+        } else {
+            echo json_encode(array("status" => "failure"));
+        }
+    } else {
+        return $count;
+    }
 }
