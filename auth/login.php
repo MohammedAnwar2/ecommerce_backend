@@ -17,9 +17,11 @@ if ($count > 0) {
     $statment->execute([$email]);
     $count = $statment->rowCount();
     if ($count > 0) {
-        printFailure("The password you entered is incorrect. Please try again");
+        printFailure("password");
+        // printFailure("The password you entered is incorrect. Please try again");
     } else {
-        printFailure("Email not found. Check spelling or sign up!");
+        printFailure("email");
+        // printFailure("Email not found. Check spelling or sign up!");
     }
 }
 
@@ -50,7 +52,7 @@ if ($count > 0) {
 //     }
 // }
 
-
+//we can do the below code insteade of the above codes
 // if ($count > 0) {
 //     echo json_encode(["status" => "success"]);
 // } else {
