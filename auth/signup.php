@@ -23,5 +23,5 @@ if($count>0){
         "users_verifycode"=>$verifycode
     );
     insertData("users",$data);
-    sendEmail($email,"Verify Code Ecommerce","verify code is '$verifycode'");
+    sendEmail($email,"Verify Code Ecommerce",$verifycode);
 }
