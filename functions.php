@@ -192,7 +192,15 @@ function printSuccess($data = "none")
 // }
 function sendEmail($to,$subject,$body)
 {
-    $header = "hellow brother , we accept you to join to our company";
-    mail($to, $subject, $body, $header);
+ 
+
+$message = "To complete the verification process, please use the following verification code: [ $body ]. 
+
+Your security and privacy are important to us. 
+
+Best regards".
+
+    $header = "Dear user";
+    mail($to, $subject, $message, $header);
 }
 
