@@ -12,7 +12,7 @@ $itemsId = filterRequest("itemsId");
 // } else {
 //     echo json_encode(array("status" => "failure", "data" => 0));
 // }
-$count = getData("cart", "cart_usersId=$usersId AND cart_itemsId = $itemsId", null, false);
+$count = getData("cart", "cart_usersId=$usersId AND cart_itemsId = $itemsId AND cart_orders = 0", null, false);
 if ($count > 0) {
     echo json_encode(array("status" => "success", "count" => $count));
 } else {
