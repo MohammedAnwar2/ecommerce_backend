@@ -204,6 +204,65 @@ Best regards".
     mail($to, $subject, $message, $header);
 }
 
+
+
+
+use Google\Auth\Credentials\ServiceAccountCredentials;
+require 'vendor/autoload.php';
+
+function sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl = null) {
+    $projectId = "first-project-c2a07";
+    $serverKey ="server_key.json";
+    try {
+      // Create service account credentials from JSON key file
+      $credential = new ServiceAccountCredentials(
+        "https://www.googleapis.com/auth/firebase.messaging",
+        json_decode(file_get_contents($serverKey), true)
+    );
+  
+      // Fetch authentication token
+      $token = $credential->fetchAuthToken();
+  
+      // Set curl handle and options
+      $ch = curl_init("https://fcm.googleapis.com/v1/projects/$projectId/messages:send");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $token['access_token'],
+      ]);
+  
+      // Prepare message body
+      $message = [
+        'message' => [
+            "topic"=> $topic,
+        //   'token' => $fcmToken,
+          'notification' => [
+            'title' => $title,
+            'body' => $body,
+          ],
+          'data'=> [
+            "pageid"=> $pageid,
+            "pagename"=> $pagename
+          ]
+        ],
+      ];
+      // Add image URL to notification if provided
+      if ($imageUrl) {
+        $message['message']['notification']['image'] = $imageUrl;
+      }
+      // Set curl options for post request with JSON data
+      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      // Execute curl request and get response
+      $response = curl_exec($ch);
+      // Close curl handle
+      curl_close($ch);
+      return $response;
+  
+    } catch (Exception $e) {
+      return $e->getMessage();
+    }
+  }
+  
 // function sendGCM($title, $message, $topic, $pageid, $pagename)
 // {
 
@@ -218,8 +277,8 @@ Best regards".
 //         'notification' => array(
 //             "body" =>  $message,
 //             "title" =>  $title,
-//             "click_action" => "FLUTTER_NOTIFICATION_CLICK",
-//             "sound" => "default"
+            // "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+            // "sound" => "default"
 
 //         ),
 //         'data' => array(
