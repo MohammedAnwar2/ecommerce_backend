@@ -14,10 +14,10 @@ $count = $statment->rowCount();
 if ($count > 0) {
     $title = "Accept Your Order Successfully";
     $body = "Your order is being prepared, wait for it to arrive";
-    $pageid="";
-    $pagename="";
+    $pageid="none";
+    $pagename="orderpendingrefresh";
     $imageUrl = null;
-    sendFCMMessage("users$usersid", $title, $body,$pageid,$pagename, $imageUrl);
+    insertNotification($title, $body, $usersid , "users$usersid" , $pageid,$pagename ,$imageUrl);
     echo json_encode(["status" => "success"]);
 }else{
     echo json_encode(["status" => "failure"]);
