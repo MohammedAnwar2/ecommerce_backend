@@ -206,62 +206,134 @@ Best regards".
 
 
 
-
 use Google\Auth\Credentials\ServiceAccountCredentials;
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php'; // Adjust the path as needed
 
-function sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl = null) {
+function sendFCMMessage($topic, $title, $body, $pageid, $pagename, $imageUrl = null) {
     $projectId = "first-project-c2a07";
-    $serverKey ="server_key.json";
+    $serverKey = __DIR__ . '/server_key.json'; // Adjust the path as needed
+
     try {
-      // Create service account credentials from JSON key file
-      $credential = new ServiceAccountCredentials(
-        "https://www.googleapis.com/auth/firebase.messaging",
-        json_decode(file_get_contents($serverKey), true)
-    );
-  
-      // Fetch authentication token
-      $token = $credential->fetchAuthToken();
-  
-      // Set curl handle and options
-      $ch = curl_init("https://fcm.googleapis.com/v1/projects/$projectId/messages:send");
-      curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/json',
-        'Authorization: Bearer ' . $token['access_token'],
-      ]);
-  
-      // Prepare message body
-      $message = [
-        'message' => [
-            "topic"=> $topic,
-        //   'token' => $fcmToken,
-          'notification' => [
-            'title' => $title,
-            'body' => $body,
-          ],
-          'data'=> [
-            "pageid"=> $pageid,
-            "pagename"=> $pagename
-          ]
-        ],
-      ];
-      // Add image URL to notification if provided
-      if ($imageUrl) {
-        $message['message']['notification']['image'] = $imageUrl;
-      }
-      // Set curl options for post request with JSON data
-      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
-      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-      // Execute curl request and get response
-      $response = curl_exec($ch);
-      // Close curl handle
-      curl_close($ch);
-      return $response;
-  
+        if (!file_exists($serverKey)) {
+            throw new Exception("Server key file not found: " . $serverKey);
+        }
+
+        // Create service account credentials from JSON key file
+        $credential = new ServiceAccountCredentials(
+            "https://www.googleapis.com/auth/firebase.messaging",
+            json_decode(file_get_contents($serverKey), true)
+        );
+
+        // Fetch authentication token
+        $token = $credential->fetchAuthToken();
+
+        if (!$token) {
+            throw new Exception("Failed to fetch authentication token.");
+        }
+
+        // Set curl handle and options
+        $ch = curl_init("https://fcm.googleapis.com/v1/projects/$projectId/messages:send");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $token['access_token'],
+        ]);
+
+        // Prepare message body
+        $message = [
+            'message' => [
+                "topic" => $topic,
+                'notification' => [
+                    'title' => $title,
+                    'body' => $body,
+                ],
+                'data' => [
+                    "pageid" => $pageid,
+                    "pagename" => $pagename,
+                ],
+            ],
+        ];
+
+        // Add image URL to notification if provided
+        if ($imageUrl) {
+            $message['message']['notification']['image'] = $imageUrl;
+        }
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // This captures the output in a variable
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+        // Execute curl request and get response
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            throw new Exception("Curl error: " . curl_error($ch));
+        }
+
+        curl_close($ch);
+        return $response;
+
     } catch (Exception $e) {
-      return $e->getMessage();
+        error_log("Error sending FCM message: " . $e->getMessage());
+        return $e->getMessage();
     }
-  }
+}
+
+
+
+// use Google\Auth\Credentials\ServiceAccountCredentials;
+// require 'vendor/autoload.php';
+
+// function sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl = null) {
+//     $projectId = "first-project-c2a07";
+//     $serverKey ="server_key.json";
+//     try {
+//       // Create service account credentials from JSON key file
+//       $credential = new ServiceAccountCredentials(
+//         "https://www.googleapis.com/auth/firebase.messaging",
+//         json_decode(file_get_contents($serverKey), true)
+//     );
+  
+//       // Fetch authentication token
+//       $token = $credential->fetchAuthToken();
+  
+//       // Set curl handle and options
+//       $ch = curl_init("https://fcm.googleapis.com/v1/projects/$projectId/messages:send");
+//       curl_setopt($ch, CURLOPT_HTTPHEADER, [
+//         'Content-Type: application/json',
+//         'Authorization: Bearer ' . $token['access_token'],
+//       ]);
+  
+//       // Prepare message body
+//       $message = [
+//         'message' => [
+//             "topic"=> $topic,
+//         //   'token' => $fcmToken,
+//           'notification' => [
+//             'title' => $title,
+//             'body' => $body,
+//           ],
+//           'data'=> [
+//             "pageid"=> $pageid,
+//             "pagename"=> $pagename
+//           ]
+//         ],
+//       ];
+//       // Add image URL to notification if provided
+//       if ($imageUrl) {
+//         $message['message']['notification']['image'] = $imageUrl;
+//       }
+//       curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
+//       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // This captures the output in a variable
+//       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+//       // Execute curl request and get response
+//       $response = curl_exec($ch);
+//       return $response;
+  
+//     } catch (Exception $e) {
+//       return $e;
+//     }
+//   }
   
 // function sendGCM($title, $message, $topic, $pageid, $pagename)
 // {
@@ -767,4 +839,3 @@ function sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl = nul
 
 
 
-// ?>

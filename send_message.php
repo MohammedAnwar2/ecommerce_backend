@@ -279,13 +279,75 @@ Authorization: Bearer <YOUR-ACCESS-TOKEN>
 
 
  
- include "functions.php";
- $topic = "users";
- $title = "Mohammed anwar";
- $body = "i am happy1240000000000000000";
- $pageid="";
- $pagename="";
- $imageUrl = "https://cdn.shopify.com/s/files/1/1061/1924/files/Sunglasses_Emoji.png?2976903553660223024"; 
- $response = sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl);
+// use Google\Auth\Credentials\ServiceAccountCredentials;
+// require 'vendor/autoload.php';
+
+// function sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl = null) {
+//     $projectId = "first-project-c2a07";
+//     $serverKey ="server_key.json";
+//     try {
+//       // Create service account credentials from JSON key file
+//       $credential = new ServiceAccountCredentials(
+//         "https://www.googleapis.com/auth/firebase.messaging",
+//         json_decode(file_get_contents($serverKey), true)
+//     );
+  
+//       // Fetch authentication token
+//       $token = $credential->fetchAuthToken();
+  
+//       // Set curl handle and options
+//       $ch = curl_init("https://fcm.googleapis.com/v1/projects/$projectId/messages:send");
+//       curl_setopt($ch, CURLOPT_HTTPHEADER, [
+//         'Content-Type: application/json',
+//         'Authorization: Bearer ' . $token['access_token'],
+//       ]);
+  
+//       // Prepare message body
+//       $message = [
+//         'message' => [
+//             "topic"=> $topic,
+//         //   'token' => $fcmToken,
+//           'notification' => [
+//             'title' => $title,
+//             'body' => $body,
+//           ],
+//           'data'=> [
+//             "pageid"=> $pageid,
+//             "pagename"=> $pagename
+//           ]
+//         ],
+//       ];
+//       // Add image URL to notification if provided
+//       if ($imageUrl) {
+//         $message['message']['notification']['image'] = $imageUrl;
+//       }
+//       curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
+//       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // This captures the output in a variable
+//       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+//       // Execute curl request and get response
+//       $response = curl_exec($ch);
+//       return $response;
+  
+//     } catch (Exception $e) {
+//       return $e;
+//     }
+//   }
+
+
+//  include "connect.php";
+//  $topic = "users";
+//  $title = "Mohammed anwar";
+//  $body = "i am happy1240000000000000000";
+//  $pageid="";
+//  $pagename="";
+//  $imageUrl = "https://cdn.shopify.com/s/files/1/1061/1924/files/Sunglasses_Emoji.png?2976903553660223024"; 
+//  $response = sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl);
  
- 
+// $usersid = filterRequest("usersid");
+// $ordersid = filterRequest("ordersid");
+
+// $data = array(
+//         "orders_status"=> 1
+//     );
+//     updateData("orders",$data,"`orders_id` = '$ordersid' AND `orders_status` = 0");
