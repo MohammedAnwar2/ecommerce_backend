@@ -12,8 +12,8 @@ $statment = $con->prepare("UPDATE `orders` SET `orders_status`= 1 WHERE `orders_
 $statment->execute([$ordersid, 0]);
 $count = $statment->rowCount();
 if ($count > 0) {
-    $title = "Accept Your Order Successfully";
-    $body = "Your order is being prepared, wait for it to arrive";
+    $title = "Successfully";
+    $body = "The order has been approved";
     $pageid="none";
     $pagename="orderpendingrefresh";
     $imageUrl = null;
