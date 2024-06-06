@@ -279,7 +279,8 @@ function sendFCMMessage($topic, $title, $body, $pageid, $pagename, $imageUrl = n
 }
 
 function insertNotification($title, $body, $userid , $topic , $pageid,$pagename ,$imageUrl) {
-    global $con;
+    global $con; 
+
     $statment = $con->prepare("INSERT INTO `notifications`(`notifications_title`, `notifications_body`, `notifications_usersid`) VALUES (?,?,?)");
     $statment->execute([$title, $body,$userid]);
     $count = $statment->rowCount();
