@@ -14,7 +14,6 @@ if($orderstype=="1"){
     $pricedelivery=0;
 }
 $totalprice = $pricedelivery + $ordersprice;
-
 $now = date("Y-m-d H:i:s");// CURRENT DATE OF TODAY
 $checkCoupon = getData("coupon","`coupon_id` = '$couponid' AND `coupon_count` > 0 AND `coupon_expiredate` > '$now'",null,false);
 
