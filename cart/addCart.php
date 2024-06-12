@@ -2,10 +2,12 @@
 include "../connect.php";
 $usersId = filterRequest("usersId");
 $itemsId = filterRequest("itemsId");
+$itemprice = filterRequest("itemprice");
 
 $data = array(
     "cart_usersId" => $usersId,
-    "cart_itemsId" => $itemsId
+    "cart_itemsId" => $itemsId,
+    "cart_itemprice"=>$itemprice
 );
 insertData("cart", $data);
 

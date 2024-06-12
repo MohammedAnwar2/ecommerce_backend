@@ -4,11 +4,12 @@ include "connect.php";
 $allData = array();
 $allData['status'] = 'success';
 $allData['categories'] = getAllData("categories",null,null,false);
+$allData['strings'] = getAllData("strings",null,null,false);
 if(count($allData['categories'])==0)
 {
     $allData['status']="failure";
 }else{
-    $allData['items'] = getAllData("itemview","items_discount!=0",null,false);
+    $allData['items'] = getAllData("itemstopselling","1=1 order by top_selling DESC",null,false);//change itemview to itemstopselling
 }
 echo json_encode($allData);
 

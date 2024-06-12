@@ -43,6 +43,32 @@ if($count> 0){
     $maxid = $statment->fetchColumn();
     $data = array('cart_orders'=>$maxid);
     updateData("cart",$data,"cart_usersId = $userId AND cart_orders = 0");
+    //!=================== store data in order address ===================
+    $orderData = getAllData("orders","1=1",null,false);
+    $lastElement = end($orderData);
+    $data = array(
+        'orderAddress_name'=>"none",
+        'orderAddress_city'=>"none",
+        'orderAddress_street'=>"none",
+        'orderAddress_lat'=>"",
+        'orderAddress_long'=>"",
+        'orderAddress_orderId'=>$lastElement["orders_id"],
+        'orderAddress_addressId'=>$addressId);
+    if($addressId!="0"){
+        $addressData = getAllData("address","address_id = ? ",[$addressId],false);
+        if($addressData.count($addressData)> 0){
+        $data = array(
+            'orderAddress_name'=>$addressData[0]["address_name"],
+            'orderAddress_city'=>$addressData[0]["address_city"],
+            'orderAddress_street'=>$addressData[0]["address_street"],
+            'orderAddress_lat'=>$addressData[0]["address_lat"],
+            'orderAddress_long'=>$addressData[0]["address_long"],
+            'orderAddress_orderId'=>$lastElement["orders_id"],
+            'orderAddress_addressId'=>$addressId);
+    }
+    insertData("orderAddress", $data,false);}
+
+    //!===================================================================
 }
 //*STEPS OF ORDERS STARTING FROM CART UNTIL ORDER AND PAYMENT
 //* 1- ADD ANY ITEMS TO CART  
