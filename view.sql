@@ -41,11 +41,21 @@ ON itemview.items_id = favorite.favorite_itemsId;
 --* get data for archive and pending
 --! this qury to get the address
 CREATE OR REPLACE VIEW ordersview AS
-SELECT orders.*, orderAddress.*
+SELECT orders.*, orderAddress.* , coupon.coupon_discount
 FROM orders 
 LEFT JOIN orderAddress 
 ON orders.orders_id = orderAddress.orderAddress_orderId
+LEFT JOIN coupon -- الكوبون اللي سيبه واللي ما سيبه
+ON coupon.coupon_id = orders.orders_coupon
 ORDER BY orders.orders_id ASC;
+-----------------------------------------
+-- CREATE OR REPLACE VIEW ordersview AS
+-- SELECT orders.*, orderAddress.*
+-- FROM orders 
+-- LEFT JOIN orderAddress 
+-- ON orders.orders_id = orderAddress.orderAddress_orderId
+-- ORDER BY orders.orders_id ASC;
+-----------------------------------
 -- CREATE OR REPLACE VIEW ordersview AS
 -- SELECT orders.* , orderAddress.*
 -- FROM orders 
