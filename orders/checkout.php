@@ -18,9 +18,12 @@ $now = date("Y-m-d H:i:s");// CURRENT DATE OF TODAY
 $checkCoupon = getData("coupon","`coupon_id` = '$couponid' AND `coupon_count` > 0 AND `coupon_expiredate` > '$now'",null,false);
 
 if($checkCoupon>0){
-    $totalprice = $totalprice - $ordersprice * $discount/100;
     $state = $con->prepare("UPDATE `coupon` SET `coupon_count`= `coupon_count`-1 WHERE `coupon_id`='$couponid'");
     $state->execute();
+    $count = $state->rowCount();
+    if($count> 0){
+        $totalprice = $totalprice - $ordersprice * $discount/100;
+    }
 }
 
 $data = array(
