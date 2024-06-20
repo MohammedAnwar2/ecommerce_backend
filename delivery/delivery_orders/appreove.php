@@ -13,7 +13,7 @@ $count = $statment->rowCount();
 if ($count > 0) {
     $imageUrl = null;
     insertNotification("Successfully", "Your Order On The Way", $usersid , "users$usersid" , "none","orderpendingrefresh" ,$imageUrl);
-    sendFCMMessage("dilevery", "Warning", "The Order is recived by the delivery man ".$deliveryid,"none","orderdeliverypendingrefresh", $imageUrl);
+    sendFCMMessage("dilevery", "Warning", "The Order is recived by the delivery man ".$deliveryid,"none","orderdeliveryacceptedrefresh", $imageUrl);
     sendFCMMessage("admin", "Warning", "The Order is recived by the delivery man","none","none", $imageUrl);
     echo json_encode(["status" => "success"]);
 }else{

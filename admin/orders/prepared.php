@@ -22,7 +22,7 @@ if ($count > 0) {
         insertNotification("Successfully", "The order has been approved", $usersid , "users$usersid" , "none","orderpendingrefresh" ,$imageUrl);
     }
     if($type=="0"){
-        sendFCMMessage("dilevery", "Warning", "There is a order waiting to approve","none","none", $imageUrl);
+        sendFCMMessage("dilevery", "Warning", "There is a order waiting to approve","none","orderdeliverypendingrefresh", $imageUrl);
     }
     echo json_encode(["status" => "success"]);
 }else{
