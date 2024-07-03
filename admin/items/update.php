@@ -30,14 +30,28 @@ if ($imagename != "empty" && $imagename != "fail") {
     deleteFile("../../uploade/item",$imageold);
     $data["items_image"] = $imagename;
 }
-// $notifymedate = getAllData("notifyme","notifyme_itemsid = $id",false);
-echo $notifymedate;
-// if(count($notifymedate)!= 0){
-//     foreach($notifymedate as $element){
-        
-//     }
-// }
-updateData("items", $data, "items_id = $id");
+ $countData = updateData("items", $data, "items_id = $id",false);
+ if($countData>0){
+    //* to send notify the user that need this item whem this item avaliable
+    $notifymedate = getAllData("notifyme","notifyme_itemsid = ?",[$id],false);
+    if(count($notifymedate)!= 0 && $count !=0 ){
+        foreach($notifymedate as $element){
+            $userid = $element["notifyme_usersid"];
+            insertUsersNotification("warning", "The $name_en are avaliable at this time ", $userid , "users$userid" , "","" ,null);
+        }
+        //* delete all the users from "notifyme" table after sending notification to make attention , the admin add new count of this item 
+        deleteData("notifyme","notifyme_itemsid = $id",false);
+        $data = array(
+            "items_isnotify" => 0,
+            "items_active"   => $active,
+        );
+        //* update the "isbotify" to 0 in "items" table
+        updateData("items", $data, "items_id = $id",false);
+    }
+        echo json_encode(array("status" => "success")); 
+ }else{
+         echo json_encode(array("status" => "failure"));
+    }
 
 
 ?>
