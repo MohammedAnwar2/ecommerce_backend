@@ -1,27 +1,28 @@
 <?php
 include "../../connect.php";
 
-$itemsname_en    = filterRequest("itemsname_en");
-$itemsname_ar    = filterRequest("itemsname_ar");
-$itemsdesc_en    = filterRequest("itemsdesc_en");
-$itemsdesc_ar    = filterRequest("itemsdesc_ar");
-$itemscount      = filterRequest("itemscount");
-$itemsactive     = filterRequest("itemsactive");
-$itemsprice      = filterRequest("itemsprice");
-$itemsdiscount   = filterRequest("itemsdiscount");
-$itemscatid      = filterRequest("itemscatid");
-$imagename       = imageUpload("../../uploade/item", "files");
+$name_en    = filterRequest("name_en");
+$name_ar    = filterRequest("name_ar");
+$desc_en    = filterRequest("desc_en");
+$desc_ar    = filterRequest("desc_ar");
+$count      = filterRequest("count");
+$price      = filterRequest("price");
+$discount   = filterRequest("discount");
+$datenow    = filterRequest("datenow");
+$catid      = filterRequest("catid");
+$imagename  = imageUpload("../../uploade/item", "files");
 
 $data = array(
-    "items_name"     => $itemsname_en,
-    "items_name_ar"  => $itemsname_ar,
-    "items_desc"     => $itemsdesc_en,
-    "items_desc_ar"  => $itemsdesc_ar,
-    "items_count"    => $itemscount,
-    "items_active"   => $itemsactive,
-    "items_price"    => $itemsprice,
-    "items_discount" => $itemsdiscount,
-    "items_cat"      => $itemscatid,
+    "items_name"     => $name_en,
+    "items_name_ar"  => $name_ar,
+    "items_desc"     => $desc_en,
+    "items_desc_ar"  => $desc_ar,
+    "items_count"    => $count,
+    "items_active"   => "1",
+    "items_price"    => $price,
+    "items_discount" => $discount,
+    "items_date"     => $datenow,
+    "items_cat"      => $catid,
 );
 
 if ($imagename == "empty" || $imagename == "fail") {

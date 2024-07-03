@@ -9,7 +9,7 @@ if(count($allData['categories'])==0)
 {
     $allData['status']="failure";
 }else{
-    $allData['items'] = getAllData("itemstopselling","1=1 order by top_selling DESC",null,false);//change itemview to itemstopselling
+    $allData['items'] = getAllData("itemstopselling","items_active != 0 order by top_selling DESC",null,false);//change itemview to itemstopselling
 }
 echo json_encode($allData);
 

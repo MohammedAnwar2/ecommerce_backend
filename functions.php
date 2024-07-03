@@ -4,6 +4,8 @@
 //  Copyright Reserved Moahmmed Anwar (Course Ecommerce)
 // ==========================================================
 
+//date_default_timezone_set("/");
+
 define("MB", 1048576);
 
 function filterRequest($requestname)
@@ -214,7 +216,7 @@ Best regards".
 use Google\Auth\Credentials\ServiceAccountCredentials;
 require __DIR__ . '/vendor/autoload.php'; // Adjust the path as needed
 
-function sendFCMMessage($topic, $title, $body, $pageid, $pagename, $imageUrl = null) {
+function sendFCMMessage($topic, $title, $body, $pageid, $pagename , $imageUrl = null) {
     $projectId = "first-project-c2a07";
     $serverKey = __DIR__ . '/server_key.json'; // Adjust the path as needed
 
@@ -254,6 +256,7 @@ function sendFCMMessage($topic, $title, $body, $pageid, $pagename, $imageUrl = n
                 'data' => [
                     "pageid" => $pageid,
                     "pagename" => $pagename,
+                    // "id" => $sendid
                 ],
             ],
         ];
@@ -283,7 +286,7 @@ function sendFCMMessage($topic, $title, $body, $pageid, $pagename, $imageUrl = n
     }
 }
 
-function insertNotification($title, $body, $userid , $topic , $pageid,$pagename ,$imageUrl) {
+function insertUsersNotification($title, $body, $userid , $topic , $pageid,$pagename ,$imageUrl) {
     global $con; 
 
     $statment = $con->prepare("INSERT INTO `notifications`(`notifications_title`, `notifications_body`, `notifications_usersid`) VALUES (?,?,?)");
@@ -292,6 +295,15 @@ function insertNotification($title, $body, $userid , $topic , $pageid,$pagename 
     sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl);
     return $count;
 }
+function insertAdminNotification($title, $body, $topic , $pageid,$pagename ,$imageUrl) {
+    global $con; 
+    $statment = $con->prepare("INSERT INTO `notifications`(`notifications_title`, `notifications_body`, `notifications_admin`) VALUES (?,?,'1')");
+    $statment->execute([$title, $body]);
+    $count = $statment->rowCount();
+    sendFCMMessage($topic, $title, $body,$pageid,$pagename , $imageUrl);
+    return $count;
+}
+
 
 
 // use Google\Auth\Credentials\ServiceAccountCredentials;

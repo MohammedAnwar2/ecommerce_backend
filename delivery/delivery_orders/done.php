@@ -10,8 +10,9 @@ $statment->execute([$ordersid, 3]);
 $count = $statment->rowCount();
 if ($count > 0) {
     $imageUrl = null;
-    insertNotification("Successfully", "The Order has been delivered", $usersid , "users$usersid" , "none","orderpendingrefresh" ,$imageUrl);
-    sendFCMMessage("admin", "Warning", "The Order has been delivered to the customer","none","none", $imageUrl);
+    insertUsersNotification("Successfully", "The Order has been delivered", $usersid , "users$usersid" , "none","orderpendingrefresh" ,$imageUrl);
+    insertAdminNotification("Successfully", "The Order number $ordersid has been delivered to the customer", "admin" , "none","adminacceptedandarchivefresh",$imageUrl);
+    //sendFCMMessage("admin", "Warning", "The Order has been delivered to the customer","none","adminacceptedandarchivefresh", $imageUrl);
     echo json_encode(["status" => "success"]);
 }else{
     echo json_encode(["status" => "failure"]);

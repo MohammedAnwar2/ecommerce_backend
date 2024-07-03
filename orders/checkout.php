@@ -46,6 +46,9 @@ if($count> 0){
     $maxid = $statment->fetchColumn();
     $data = array('cart_orders'=>$maxid);
     updateData("cart",$data,"cart_usersId = $userId AND cart_orders = 0");
+    //* send notification to the admin
+    insertAdminNotification("Warning", "The order number $maxid is waiting to approve " , "admin" , "none","refershadminpendingorders",null);
+    //sendFCMMessage("admin", "Warning", "There Are One Order Waiting To Approve","adminpendingpage","refershadminpendingorders", null);
     //!=================== store data in order address ===================
     $orderData = getAllData("orders","1=1",null,false);
     $lastElement = end($orderData);

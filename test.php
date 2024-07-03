@@ -1,14 +1,6 @@
 <?php
-include "send_message.php";
-// sendMEG("users", "my name is mohammed", "2121");
+include "./connect.php";
 
-// // Usage
-// $serviceAccountFile = 'server_key.json';
-// $title = 'Test Notification';
-// $body = 'This is a test notification.';
-// $token = 'recipient-device-token'; // The device token you want to send the notification to
-
-// $response = sendNotification($title, $body, $token, $serviceAccountFile);
-// echo $response;
+insertAdminNotification("Warning", "There Is One Order Waiting To Approve" , "admin" , "none","refershadminpendingorders",null);
 
 ?>
