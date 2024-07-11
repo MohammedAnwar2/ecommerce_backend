@@ -88,9 +88,9 @@ WHERE cart_orders != 0
 GROUP BY cart_itemsId 
 ORDER BY top_selling ASC;
 
-
+--* to get items id that ordered
 CREATE OR REPLACE VIEW getitemsidorder AS 
-SELECT cart.cart_itemsId from cart 
+SELECT cart.*,COUNT(cart.cart_itemsId) AS currentcountitems from cart 
 JOIN ordersview
 ON cart.cart_orders = ordersview.orders_id
-GROUP BY cart.cart_itemsId;
+GROUP BY cart.cart_itemsId , cart.cart_orders;
