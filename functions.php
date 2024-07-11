@@ -197,19 +197,48 @@ function printSuccess($data = "none")
 //         printFailure($failureMessage);
 //     }
 // }
-function sendEmail($to,$subject,$body)
+
+//!==============================
+//!==============================
+// function sendEmail($to,$subject,$body)
+// {
+    
+//     $message = "To complete the verification process, please use the following verification code: [ $body ]. Your security and privacy are important to us. Best regards";
+
+//     $header = "Dear user";
+//     mail($to, $subject, $message, $header);
+// }
+//!==============================
+
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+function sendEmail($to, $subject, $body)
 {
- 
 
-$message = "To complete the verification process, please use the following verification code: [ $body ]. 
-
-Your security and privacy are important to us. 
-
-Best regards".
-
-    $header = "Dear user";
-    mail($to, $subject, $message, $header);
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->SMTPDebug = 0;
+    $mail->Host = 'smtp.hostinger.com';
+    $mail->Port = 587;
+    $mail->SMTPAuth = true;
+    $mail->Username = 'moan@mohammedanwar.in';
+    $mail->Password = 'Abc#772555127';
+    $mail->setFrom('moan@mohammedanwar.in', 'Mohammed');
+    $mail->addReplyTo('moan@mohammedanwar.in', 'Mohammed');
+    $mail->addAddress($to, 'John');
+    $mail->Subject = $subject;
+    $mail->msgHTML(file_get_contents('message.html'), __DIR__);
+    $mail->Body = $body;
+    //$mail->addAttachment('attachment.txt');
+    if (!$mail->send()) {
+        // echo 'Mailer Error: ' . $mail->ErrorInfo;
+    } else {
+        // echo 'The email message was sent.';
+    }
 }
+
+
 
 
 

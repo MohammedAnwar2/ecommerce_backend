@@ -22,6 +22,6 @@ if($count>0){
         "users_password"=>$password,
         "users_verifycode"=>$verifycode
     );
-    insertData("users",$data);
     sendEmail($email,"Verify Code Ecommerce",$verifycode);
+    insertData("users",$data);
 }

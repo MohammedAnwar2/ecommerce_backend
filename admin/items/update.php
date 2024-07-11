@@ -45,7 +45,7 @@ if ($imagename != "empty" && $imagename != "fail") {
             "items_isnotify" => 0,
             "items_active"   => $active,
         );
-        //* update the "isbotify" to 0 in "items" table
+        //* update the "isnotify" to 0 in "items" table
         updateData("items", $data, "items_id = $id",false);
     }
         echo json_encode(array("status" => "success")); 

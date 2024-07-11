@@ -49,6 +49,9 @@ if($count> 0){
     //* send notification to the admin
     insertAdminNotification("Warning", "The order number $maxid is waiting to approve " , "admin" , "none","refershadminpendingorders",null);
     //sendFCMMessage("admin", "Warning", "There Are One Order Waiting To Approve","adminpendingpage","refershadminpendingorders", null);
+    //!=================== decrease the count of items ===================
+    
+    //!===================================================================
     //!=================== store data in order address ===================
     $orderData = getAllData("orders","1=1",null,false);
     $lastElement = end($orderData);
@@ -73,8 +76,7 @@ if($count> 0){
             'orderAddress_addressId'=>$addressId);
     }
     insertData("orderAddress", $data,false);}
-
-    //!===================================================================
+//!===================================================================
 }
 //*STEPS OF ORDERS STARTING FROM CART UNTIL ORDER AND PAYMENT
 //* 1- ADD ANY ITEMS TO CART  

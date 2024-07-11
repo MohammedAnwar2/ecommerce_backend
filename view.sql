@@ -4,7 +4,6 @@ FROM items JOIN categories
 ON items_cat = categories.categories_id
 
 
-
 CREATE OR REPLACE VIEW allFavorite AS
 SELECT favorite.*,items.* , ROUND(items.items_price - (items.items_price*items.items_discount/100), 2) AS total_price ,users.users_id FROM favorite
 JOIN items ON favorite.favorite_itemsId = items.items_id
@@ -17,7 +16,7 @@ JOIN users ON favorite.favorite_usersId = users.users_id;
 
 
 CREATE OR REPLACE VIEW cartProducts AS
-SELECT ROUND(SUM(items.items_price - (items.items_price*items.items_discount/100)), 2) AS total_price , COUNT(items.items_price) as Itemscount, cart.*,items.*
+SELECT ROUND(SUM(items.items_price - (items.items_price*items.items_discount/100)), 2) AS total_price , COUNT(items.items_price) as currentItemsCount, cart.*,items.*
 FROM items 
 JOIN cart ON items.items_id = cart.cart_itemsId 
 JOIN users ON users.users_id = cart_usersId
@@ -88,3 +87,10 @@ FROM cart JOIN items ON cart_itemsId = items.items_id
 WHERE cart_orders != 0 
 GROUP BY cart_itemsId 
 ORDER BY top_selling ASC;
+
+
+CREATE OR REPLACE VIEW getitemsidorder AS 
+SELECT cart.cart_itemsId from cart 
+JOIN ordersview
+ON cart.cart_orders = ordersview.orders_id
+GROUP BY cart.cart_itemsId;
