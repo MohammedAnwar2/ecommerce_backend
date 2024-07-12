@@ -32,14 +32,14 @@ if ($imagename != "empty" && $imagename != "fail") {
 }
  $countData = updateData("items", $data, "items_id = $id",false);
  if($countData>0){
-    //* to send notify the user that need this item whem this item avaliable
+    //* to send notification to the user that need this item when this item avaliable => {$count !=0}
     $notifymedate = getAllData("notifyme","notifyme_itemsid = ?",[$id],false);
     if(count($notifymedate)!= 0 && $count !=0 ){
         foreach($notifymedate as $element){
             $userid = $element["notifyme_usersid"];
-            insertUsersNotification("warning", "The $name_en are avaliable at this time ", $userid , "users$userid" , "","" ,null);
+            insertUsersNotification("warning", "The $name_en are avaliable at this time ", $userid , "users$userid" , "","notifyme" ,null);
         }
-        //* delete all the users from "notifyme" table after sending notification to make attention , the admin add new count of this item 
+        //* delete all the users from "notifyme" table they wanted to notify them when the item avaliable , after sending notification to make attention , and the admin add new count of this item 
         deleteData("notifyme","notifyme_itemsid = $id",false);
         $data = array(
             "items_isnotify" => 0,
@@ -52,6 +52,5 @@ if ($imagename != "empty" && $imagename != "fail") {
  }else{
          echo json_encode(array("status" => "failure"));
     }
-
 
 ?>
