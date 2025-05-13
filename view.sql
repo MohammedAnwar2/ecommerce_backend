@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW itemview AS
 SELECT items.* , categories.* ,ROUND((items_price - (items_price*items_discount/100)),2)AS itemspricediscount
 FROM items JOIN categories 
-ON items_cat = categories.categories_id
+ON items_cat = categories.categories_id;
 
 
 CREATE OR REPLACE VIEW allFavorite AS

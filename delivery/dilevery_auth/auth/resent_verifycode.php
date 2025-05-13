@@ -12,7 +12,7 @@ if($count>0){
         "dilevery_verifycode"=>$verifycode
     );
     updateData("dilevery",$data,"`dilevery_email`='$email'");
-    sendEmail($email,"Verify Code Ecommerce",$verifycode);
+    // sendEmail($email,"Verify Code Ecommerce",$verifycode);
 }else{
     printFailure();
 }

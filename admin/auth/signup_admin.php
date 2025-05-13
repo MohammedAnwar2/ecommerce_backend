@@ -23,5 +23,5 @@ if($count>0){
         "admin_verifycode"=>$verifycode
     );
     insertData("admin",$data);
-    sendEmail($email,"Verify Code Ecommerce",$verifycode);
+    // sendEmail($email,"Verify Code Ecommerce",$verifycode);
 }

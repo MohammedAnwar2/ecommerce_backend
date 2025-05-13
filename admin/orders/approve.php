@@ -15,7 +15,7 @@ if ($count > 0) {
     $imageUrl = null;
     insertUsersNotification($title, "The order has been approved", $usersid , "users$usersid" , $pageid,$userpagename ,$imageUrl);
     insertAdminNotification($title, "The order number $ordersid has been approved", "admin" , $pageid,$adminpagename  ,$imageUrl);
-    // sendFCMMessage("admin", $title, $body,$pageid,$adminpagename, $imageUrl);
+    sendFCMMessage("admin", $title, $body,$pageid,$adminpagename, $imageUrl);
     echo json_encode(["status" => "success"]);
 }else{
     echo json_encode(["status" => "failure"]);

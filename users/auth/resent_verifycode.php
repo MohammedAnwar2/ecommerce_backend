@@ -12,7 +12,7 @@ if($count>0){
         "users_verifycode"=>$verifycode
     );
     updateData("users",$data,"`users_email`='$email'");
-    sendEmail($email,"Verify Code Ecommerce",$verifycode);
+    // sendEmail($email,"Verify Code Ecommerce",$verifycode);
 }else{
     printFailure();
 }

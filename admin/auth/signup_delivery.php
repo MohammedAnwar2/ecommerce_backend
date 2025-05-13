@@ -23,5 +23,5 @@ if($count>0){
         "dilevery_verifycode"=>$verifycode
     );
     insertData("dilevery",$data);
-    sendEmail($email,"Verify Code Ecommerce",$verifycode);
+    // sendEmail($email,"Verify Code Ecommerce",$verifycode);
 }
