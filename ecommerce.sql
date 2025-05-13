@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2025 at 08:37 AM
+-- Generation Time: May 13, 2025 at 03:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,6 +37,13 @@ CREATE TABLE `address` (
   `address_long` decimal(11,8) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`address_id`, `address_usersId`, `address_name`, `address_city`, `address_street`, `address_lat`, `address_long`, `created_at`) VALUES
+(1, 5, 'dooriyan', 'Bangalore ', 'Main street ', 13.14494000, 77.57451170, '2025-05-13 03:24:04');
 
 -- --------------------------------------------------------
 
@@ -74,6 +81,8 @@ CREATE TABLE `allfavorite` (
 ,`items_active` tinyint(1)
 ,`items_price` decimal(10,2)
 ,`items_discount` decimal(5,2)
+,`items_image` text
+,`items_isnotify` int(11)
 ,`items_date` datetime
 ,`items_cat` int(11) unsigned
 ,`total_price` decimal(15,2)
@@ -100,7 +109,27 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `cart_usersId`, `cart_itemsId`, `cart_itemprice`, `created_at`, `cart_orders`) VALUES
-(1, 5, 1, 1150.00, '2025-05-12 05:59:31', 4);
+(34, 5, 1, 1000.00, '2025-05-13 05:08:55', 24),
+(35, 5, 1, 1000.00, '2025-05-13 05:08:55', 24),
+(36, 5, 1, 1000.00, '2025-05-13 05:08:55', 24),
+(37, 5, 1, 1000.00, '2025-05-13 05:08:56', 24),
+(38, 5, 1, 1000.00, '2025-05-13 05:08:56', 24),
+(39, 5, 1, 1000.00, '2025-05-13 05:08:56', 24),
+(40, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
+(41, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
+(42, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
+(43, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
+(44, 5, 1, 1000.00, '2025-05-13 05:19:38', 27),
+(45, 5, 1, 1000.00, '2025-05-13 05:23:00', 28),
+(46, 5, 1, 1000.00, '2025-05-13 05:23:01', 28),
+(47, 5, 1, 1000.00, '2025-05-13 05:23:01', 28),
+(48, 5, 1, 1000.00, '2025-05-13 05:27:28', 29),
+(49, 5, 1, 1000.00, '2025-05-13 05:27:28', 29),
+(50, 5, 1, 1000.00, '2025-05-13 05:27:28', 29),
+(51, 5, 1, 1000.00, '2025-05-13 05:41:14', 30),
+(52, 5, 1, 1000.00, '2025-05-13 05:41:14', 30),
+(53, 5, 1, 1000.00, '2025-05-13 05:41:14', 30),
+(54, 5, 1, 1000.00, '2025-05-13 05:41:15', 30);
 
 -- --------------------------------------------------------
 
@@ -126,6 +155,8 @@ CREATE TABLE `cartproducts` (
 ,`items_active` tinyint(1)
 ,`items_price` decimal(10,2)
 ,`items_discount` decimal(5,2)
+,`items_image` text
+,`items_isnotify` int(11)
 ,`items_date` datetime
 ,`items_cat` int(11) unsigned
 );
@@ -159,10 +190,17 @@ INSERT INTO `categories` (`categories_id`, `categories_name`, `categories_name_a
 CREATE TABLE `coupon` (
   `coupon_id` int(11) NOT NULL,
   `coupon_name` varchar(255) NOT NULL,
-  `coupon_expiredate` date DEFAULT NULL,
+  `coupon_expiredate` date DEFAULT current_timestamp(),
   `coupon_discount` decimal(5,2) DEFAULT 0.00,
   `coupon_count` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `coupon`
+--
+
+INSERT INTO `coupon` (`coupon_id`, `coupon_name`, `coupon_expiredate`, `coupon_discount`, `coupon_count`) VALUES
+(1, 'mohammed', '2026-05-25', 40.00, 99);
 
 -- --------------------------------------------------------
 
@@ -180,6 +218,13 @@ CREATE TABLE `dilevery` (
   `dilevery_approve` tinyint(1) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dilevery`
+--
+
+INSERT INTO `dilevery` (`dilevery_id`, `dilevery_name`, `dilevery_email`, `dilevery_phone`, `dilevery_password`, `dilevery_verifycode`, `dilevery_approve`, `created_at`) VALUES
+(1, 'm@gmail.com', 'moanbm123@gmail.com', '772555127', '6367c48dd193d56ea7b0baad25b19455e529f5ee', '18809', 1, '2025-05-13 12:57:53');
 
 -- --------------------------------------------------------
 
@@ -209,6 +254,8 @@ CREATE TABLE `favoritesearch` (
 ,`items_active` tinyint(1)
 ,`items_price` decimal(10,2)
 ,`items_discount` decimal(5,2)
+,`items_image` text
+,`items_isnotify` int(11)
 ,`items_date` datetime
 ,`items_cat` int(11) unsigned
 ,`categories_id` int(11) unsigned
@@ -251,6 +298,7 @@ CREATE TABLE `items` (
   `items_price` decimal(10,2) NOT NULL,
   `items_discount` decimal(5,2) DEFAULT 0.00,
   `items_image` text NOT NULL,
+  `items_isnotify` int(11) NOT NULL DEFAULT 0,
   `items_date` datetime DEFAULT current_timestamp(),
   `items_cat` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -259,8 +307,8 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`items_id`, `items_name`, `items_name_ar`, `items_desc`, `items_desc_ar`, `items_count`, `items_active`, `items_price`, `items_discount`, `items_image`, `items_date`, `items_cat`) VALUES
-(1, 'fdgfdg', 'fgfdgfd', 'fdsgfg', 'dsfgfgdf', 10, 1, 1000.00, 0.00, 'dress.png', '2025-05-12 11:18:59', 1);
+INSERT INTO `items` (`items_id`, `items_name`, `items_name_ar`, `items_desc`, `items_desc_ar`, `items_count`, `items_active`, `items_price`, `items_discount`, `items_image`, `items_isnotify`, `items_date`, `items_cat`) VALUES
+(1, 'fdgfdg', 'fgfdgfd', 'fdsgfg', 'dsfgfgdf', 8990, 1, 1000.00, 0.00, 'dress.png', 0, '2025-05-12 11:18:59', 1);
 
 -- --------------------------------------------------------
 
@@ -285,6 +333,8 @@ CREATE TABLE `itemstopselling` (
 ,`items_active` tinyint(1)
 ,`items_price` decimal(10,2)
 ,`items_discount` decimal(5,2)
+,`items_image` text
+,`items_isnotify` int(11)
 ,`items_date` datetime
 ,`items_cat` int(11) unsigned
 ,`itemspricediscount` decimal(15,2)
@@ -306,6 +356,8 @@ CREATE TABLE `itemview` (
 ,`items_active` tinyint(1)
 ,`items_price` decimal(10,2)
 ,`items_discount` decimal(5,2)
+,`items_image` text
+,`items_isnotify` int(11)
 ,`items_date` datetime
 ,`items_cat` int(11) unsigned
 ,`categories_id` int(11) unsigned
@@ -326,8 +378,16 @@ CREATE TABLE `notifications` (
   `notifications_title` varchar(255) DEFAULT NULL,
   `notifications_body` text DEFAULT NULL,
   `notifications_usersid` int(11) DEFAULT NULL,
-  `notifications_datetime` datetime DEFAULT NULL
+  `notifications_admin` int(11) DEFAULT NULL,
+  `notifications_datetime` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`notifications_id`, `notifications_title`, `notifications_body`, `notifications_usersid`, `notifications_admin`, `notifications_datetime`) VALUES
+(1, 'Warning', 'The order number 30 is waiting to approve ', NULL, 1, '2025-05-13 11:11:43');
 
 -- --------------------------------------------------------
 
@@ -345,6 +405,17 @@ CREATE TABLE `orderaddress` (
   `orderAddress_orderId` int(11) UNSIGNED NOT NULL,
   `orderAddress_addressId` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orderaddress`
+--
+
+INSERT INTO `orderaddress` (`orderAddress_id`, `orderAddress_name`, `orderAddress_city`, `orderAddress_street`, `orderAddress_lat`, `orderAddress_long`, `orderAddress_orderId`, `orderAddress_addressId`) VALUES
+(1, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 25, 1),
+(2, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 26, 1),
+(3, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 27, 1),
+(4, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 28, 1),
+(5, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -370,6 +441,8 @@ CREATE TABLE `orderdetailsview` (
 ,`items_active` tinyint(1)
 ,`items_price` decimal(10,2)
 ,`items_discount` decimal(5,2)
+,`items_image` text
+,`items_isnotify` int(11)
 ,`items_date` datetime
 ,`items_cat` int(11) unsigned
 );
@@ -384,14 +457,26 @@ CREATE TABLE `orders` (
   `orders_id` int(11) NOT NULL,
   `orders_paymentmethod` varchar(50) NOT NULL,
   `orders_userId` int(11) NOT NULL,
-  `orders_addressId` int(11) NOT NULL,
+  `orders_deliveryid` tinyint(4) NOT NULL DEFAULT 0,
+  `orders_addressId` int(11) NOT NULL DEFAULT 0,
   `orders_type` varchar(50) DEFAULT NULL,
   `orders_pricedelivery` decimal(10,2) DEFAULT 0.00,
   `orders_price` decimal(10,2) NOT NULL,
   `orders_totalprice` decimal(10,2) NOT NULL,
   `orders_coupon` int(11) DEFAULT NULL,
+  `orders_status` tinyint(4) NOT NULL DEFAULT 0,
+  `orders_rating` int(11) NOT NULL DEFAULT 0,
+  `orders_noteRating` text DEFAULT NULL,
   `orders_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orders_id`, `orders_paymentmethod`, `orders_userId`, `orders_deliveryid`, `orders_addressId`, `orders_type`, `orders_pricedelivery`, `orders_price`, `orders_totalprice`, `orders_coupon`, `orders_status`, `orders_rating`, `orders_noteRating`, `orders_date`) VALUES
+(28, '0', 5, 0, 1, '0', 30.00, 3000.00, 3030.00, 1, 0, 0, 'none', '2025-05-13 05:23:05'),
+(30, '0', 5, 0, 1, '0', 30.00, 4000.00, 4030.00, 1, 0, 0, 'none', '2025-05-13 05:41:19');
 
 -- --------------------------------------------------------
 
@@ -409,6 +494,9 @@ CREATE TABLE `ordersview` (
 ,`orders_price` decimal(10,2)
 ,`orders_totalprice` decimal(10,2)
 ,`orders_coupon` int(11)
+,`orders_status` tinyint(4)
+,`orders_rating` int(11)
+,`orders_noteRating` text
 ,`orders_date` timestamp
 ,`orderAddress_id` int(11)
 ,`orderAddress_name` varchar(255)
@@ -465,7 +553,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`users_id`, `users_name`, `users_email`, `users_phone`, `users_password`, `users_verifycode`, `users_approve`, `created_at`) VALUES
 (2, 'm@gmail.com', 'm@gmail.com', '4565464564', '7c4a8d09ca3762af61e59520943dc26494f8941b', '21719', 0, '2025-04-27 22:51:01'),
 (3, 'm@gmail.com', 'mghjgjhg@gmail.com', '45654645644234', '7c4a8d09ca3762af61e59520943dc26494f8941b', '78213', 0, '2025-05-12 05:25:26'),
-(5, 'mohammed anwar', 'moanbm123@gmail.com', '772555127', '6367c48dd193d56ea7b0baad25b19455e529f5ee', '20590', 0, '2025-05-12 05:28:53');
+(5, 'mohammed anwar', 'moanbm123@gmail.com', '772555127', '6367c48dd193d56ea7b0baad25b19455e529f5ee', '92111', 1, '2025-05-12 05:28:53');
 
 -- --------------------------------------------------------
 
@@ -474,7 +562,7 @@ INSERT INTO `users` (`users_id`, `users_name`, `users_email`, `users_phone`, `us
 --
 DROP TABLE IF EXISTS `allfavorite`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `allfavorite`  AS SELECT `favorite`.`favorite_id` AS `favorite_id`, `favorite`.`favorite_usersId` AS `favorite_usersId`, `favorite`.`favorite_itemsId` AS `favorite_itemsId`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat`, round(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100,2) AS `total_price`, `users`.`users_id` AS `users_id` FROM ((`favorite` join `items` on(`favorite`.`favorite_itemsId` = `items`.`items_id`)) join `users` on(`favorite`.`favorite_usersId` = `users`.`users_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `allfavorite`  AS SELECT `favorite`.`favorite_id` AS `favorite_id`, `favorite`.`favorite_usersId` AS `favorite_usersId`, `favorite`.`favorite_itemsId` AS `favorite_itemsId`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_image` AS `items_image`, `items`.`items_isnotify` AS `items_isnotify`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat`, round(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100,2) AS `total_price`, `users`.`users_id` AS `users_id` FROM ((`favorite` join `items` on(`favorite`.`favorite_itemsId` = `items`.`items_id`)) join `users` on(`favorite`.`favorite_usersId` = `users`.`users_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -483,7 +571,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `cartproducts`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cartproducts`  AS SELECT round(sum(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100),2) AS `total_price`, count(`items`.`items_price`) AS `currentItemsCount`, `cart`.`cart_id` AS `cart_id`, `cart`.`cart_usersId` AS `cart_usersId`, `cart`.`cart_itemsId` AS `cart_itemsId`, `cart`.`cart_itemprice` AS `cart_itemprice`, `cart`.`created_at` AS `created_at`, `cart`.`cart_orders` AS `cart_orders`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat` FROM ((`items` join `cart` on(`items`.`items_id` = `cart`.`cart_itemsId`)) join `users` on(`users`.`users_id` = `cart`.`cart_usersId`)) WHERE `cart`.`cart_orders` = 0 GROUP BY `items`.`items_price`, `cart`.`cart_usersId` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cartproducts`  AS SELECT round(sum(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100),2) AS `total_price`, count(`items`.`items_price`) AS `currentItemsCount`, `cart`.`cart_id` AS `cart_id`, `cart`.`cart_usersId` AS `cart_usersId`, `cart`.`cart_itemsId` AS `cart_itemsId`, `cart`.`cart_itemprice` AS `cart_itemprice`, `cart`.`created_at` AS `created_at`, `cart`.`cart_orders` AS `cart_orders`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_image` AS `items_image`, `items`.`items_isnotify` AS `items_isnotify`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat` FROM ((`items` join `cart` on(`items`.`items_id` = `cart`.`cart_itemsId`)) join `users` on(`users`.`users_id` = `cart`.`cart_usersId`)) WHERE `cart`.`cart_orders` = 0 GROUP BY `items`.`items_price`, `cart`.`cart_usersId` ;
 
 -- --------------------------------------------------------
 
@@ -492,7 +580,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `favoritesearch`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `favoritesearch`  AS SELECT DISTINCT `itemview`.`items_id` AS `items_id`, `itemview`.`items_name` AS `items_name`, `itemview`.`items_name_ar` AS `items_name_ar`, `itemview`.`items_desc` AS `items_desc`, `itemview`.`items_desc_ar` AS `items_desc_ar`, `itemview`.`items_count` AS `items_count`, `itemview`.`items_active` AS `items_active`, `itemview`.`items_price` AS `items_price`, `itemview`.`items_discount` AS `items_discount`, `itemview`.`items_date` AS `items_date`, `itemview`.`items_cat` AS `items_cat`, `itemview`.`categories_id` AS `categories_id`, `itemview`.`categories_name` AS `categories_name`, `itemview`.`categories_name_ar` AS `categories_name_ar`, `itemview`.`categories_image` AS `categories_image`, `itemview`.`itemspricediscount` AS `itemspricediscount` FROM (`itemview` join `favorite` on(`itemview`.`items_id` = `favorite`.`favorite_itemsId`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `favoritesearch`  AS SELECT DISTINCT `itemview`.`items_id` AS `items_id`, `itemview`.`items_name` AS `items_name`, `itemview`.`items_name_ar` AS `items_name_ar`, `itemview`.`items_desc` AS `items_desc`, `itemview`.`items_desc_ar` AS `items_desc_ar`, `itemview`.`items_count` AS `items_count`, `itemview`.`items_active` AS `items_active`, `itemview`.`items_price` AS `items_price`, `itemview`.`items_discount` AS `items_discount`, `itemview`.`items_image` AS `items_image`, `itemview`.`items_isnotify` AS `items_isnotify`, `itemview`.`items_date` AS `items_date`, `itemview`.`items_cat` AS `items_cat`, `itemview`.`categories_id` AS `categories_id`, `itemview`.`categories_name` AS `categories_name`, `itemview`.`categories_name_ar` AS `categories_name_ar`, `itemview`.`categories_image` AS `categories_image`, `itemview`.`itemspricediscount` AS `itemspricediscount` FROM (`itemview` join `favorite` on(`itemview`.`items_id` = `favorite`.`favorite_itemsId`)) ;
 
 -- --------------------------------------------------------
 
@@ -510,7 +598,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `itemstopselling`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `itemstopselling`  AS SELECT count(`cart`.`cart_itemsId`) AS `top_selling`, `cart`.`cart_id` AS `cart_id`, `cart`.`cart_usersId` AS `cart_usersId`, `cart`.`cart_itemsId` AS `cart_itemsId`, `cart`.`cart_itemprice` AS `cart_itemprice`, `cart`.`created_at` AS `created_at`, `cart`.`cart_orders` AS `cart_orders`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat`, round(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100,2) AS `itemspricediscount` FROM (`cart` join `items` on(`cart`.`cart_itemsId` = `items`.`items_id`)) WHERE `cart`.`cart_orders` <> 0 GROUP BY `cart`.`cart_itemsId` ORDER BY count(`cart`.`cart_itemsId`) ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `itemstopselling`  AS SELECT count(`cart`.`cart_itemsId`) AS `top_selling`, `cart`.`cart_id` AS `cart_id`, `cart`.`cart_usersId` AS `cart_usersId`, `cart`.`cart_itemsId` AS `cart_itemsId`, `cart`.`cart_itemprice` AS `cart_itemprice`, `cart`.`created_at` AS `created_at`, `cart`.`cart_orders` AS `cart_orders`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_image` AS `items_image`, `items`.`items_isnotify` AS `items_isnotify`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat`, round(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100,2) AS `itemspricediscount` FROM (`cart` join `items` on(`cart`.`cart_itemsId` = `items`.`items_id`)) WHERE `cart`.`cart_orders` <> 0 GROUP BY `cart`.`cart_itemsId` ORDER BY count(`cart`.`cart_itemsId`) ASC ;
 
 -- --------------------------------------------------------
 
@@ -519,7 +607,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `itemview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `itemview`  AS SELECT `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat`, `categories`.`categories_id` AS `categories_id`, `categories`.`categories_name` AS `categories_name`, `categories`.`categories_name_ar` AS `categories_name_ar`, `categories`.`categories_image` AS `categories_image`, round(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100,2) AS `itemspricediscount` FROM (`items` join `categories` on(`items`.`items_cat` = `categories`.`categories_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `itemview`  AS SELECT `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_image` AS `items_image`, `items`.`items_isnotify` AS `items_isnotify`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat`, `categories`.`categories_id` AS `categories_id`, `categories`.`categories_name` AS `categories_name`, `categories`.`categories_name_ar` AS `categories_name_ar`, `categories`.`categories_image` AS `categories_image`, round(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100,2) AS `itemspricediscount` FROM (`items` join `categories` on(`items`.`items_cat` = `categories`.`categories_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -528,7 +616,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `orderdetailsview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orderdetailsview`  AS SELECT round(sum(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100),2) AS `total_price`, count(`items`.`items_price`) AS `Itemscount`, `cart`.`cart_id` AS `cart_id`, `cart`.`cart_usersId` AS `cart_usersId`, `cart`.`cart_itemsId` AS `cart_itemsId`, `cart`.`cart_itemprice` AS `cart_itemprice`, `cart`.`created_at` AS `created_at`, `cart`.`cart_orders` AS `cart_orders`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat` FROM (`orders` join ((`items` join `cart` on(`items`.`items_id` = `cart`.`cart_itemsId`)) join `users` on(`users`.`users_id` = `cart`.`cart_usersId`))) WHERE `cart`.`cart_orders` <> 0 AND `orders`.`orders_id` = `cart`.`cart_orders` GROUP BY `items`.`items_price`, `cart`.`cart_usersId`, `cart`.`cart_orders` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orderdetailsview`  AS SELECT round(sum(`items`.`items_price` - `items`.`items_price` * `items`.`items_discount` / 100),2) AS `total_price`, count(`items`.`items_price`) AS `Itemscount`, `cart`.`cart_id` AS `cart_id`, `cart`.`cart_usersId` AS `cart_usersId`, `cart`.`cart_itemsId` AS `cart_itemsId`, `cart`.`cart_itemprice` AS `cart_itemprice`, `cart`.`created_at` AS `created_at`, `cart`.`cart_orders` AS `cart_orders`, `items`.`items_id` AS `items_id`, `items`.`items_name` AS `items_name`, `items`.`items_name_ar` AS `items_name_ar`, `items`.`items_desc` AS `items_desc`, `items`.`items_desc_ar` AS `items_desc_ar`, `items`.`items_count` AS `items_count`, `items`.`items_active` AS `items_active`, `items`.`items_price` AS `items_price`, `items`.`items_discount` AS `items_discount`, `items`.`items_image` AS `items_image`, `items`.`items_isnotify` AS `items_isnotify`, `items`.`items_date` AS `items_date`, `items`.`items_cat` AS `items_cat` FROM (`orders` join ((`items` join `cart` on(`items`.`items_id` = `cart`.`cart_itemsId`)) join `users` on(`users`.`users_id` = `cart`.`cart_usersId`))) WHERE `cart`.`cart_orders` <> 0 AND `orders`.`orders_id` = `cart`.`cart_orders` GROUP BY `items`.`items_price`, `cart`.`cart_usersId`, `cart`.`cart_orders` ;
 
 -- --------------------------------------------------------
 
@@ -537,7 +625,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ordersview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ordersview`  AS SELECT `orders`.`orders_id` AS `orders_id`, `orders`.`orders_paymentmethod` AS `orders_paymentmethod`, `orders`.`orders_userId` AS `orders_userId`, `orders`.`orders_addressId` AS `orders_addressId`, `orders`.`orders_type` AS `orders_type`, `orders`.`orders_pricedelivery` AS `orders_pricedelivery`, `orders`.`orders_price` AS `orders_price`, `orders`.`orders_totalprice` AS `orders_totalprice`, `orders`.`orders_coupon` AS `orders_coupon`, `orders`.`orders_date` AS `orders_date`, `orderaddress`.`orderAddress_id` AS `orderAddress_id`, `orderaddress`.`orderAddress_name` AS `orderAddress_name`, `orderaddress`.`orderAddress_city` AS `orderAddress_city`, `orderaddress`.`orderAddress_street` AS `orderAddress_street`, `orderaddress`.`orderAddress_lat` AS `orderAddress_lat`, `orderaddress`.`orderAddress_long` AS `orderAddress_long`, `orderaddress`.`orderAddress_orderId` AS `orderAddress_orderId`, `orderaddress`.`orderAddress_addressId` AS `orderAddress_addressId`, `coupon`.`coupon_discount` AS `coupon_discount` FROM ((`orders` left join `orderaddress` on(`orders`.`orders_id` = `orderaddress`.`orderAddress_orderId`)) left join `coupon` on(`coupon`.`coupon_id` = `orders`.`orders_coupon`)) ORDER BY `orders`.`orders_id` ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ordersview`  AS SELECT `orders`.`orders_id` AS `orders_id`, `orders`.`orders_paymentmethod` AS `orders_paymentmethod`, `orders`.`orders_userId` AS `orders_userId`, `orders`.`orders_addressId` AS `orders_addressId`, `orders`.`orders_type` AS `orders_type`, `orders`.`orders_pricedelivery` AS `orders_pricedelivery`, `orders`.`orders_price` AS `orders_price`, `orders`.`orders_totalprice` AS `orders_totalprice`, `orders`.`orders_coupon` AS `orders_coupon`, `orders`.`orders_status` AS `orders_status`, `orders`.`orders_rating` AS `orders_rating`, `orders`.`orders_noteRating` AS `orders_noteRating`, `orders`.`orders_date` AS `orders_date`, `orderaddress`.`orderAddress_id` AS `orderAddress_id`, `orderaddress`.`orderAddress_name` AS `orderAddress_name`, `orderaddress`.`orderAddress_city` AS `orderAddress_city`, `orderaddress`.`orderAddress_street` AS `orderAddress_street`, `orderaddress`.`orderAddress_lat` AS `orderAddress_lat`, `orderaddress`.`orderAddress_long` AS `orderAddress_long`, `orderaddress`.`orderAddress_orderId` AS `orderAddress_orderId`, `orderaddress`.`orderAddress_addressId` AS `orderAddress_addressId`, `coupon`.`coupon_discount` AS `coupon_discount` FROM ((`orders` left join `orderaddress` on(`orders`.`orders_id` = `orderaddress`.`orderAddress_orderId`)) left join `coupon` on(`coupon`.`coupon_id` = `orders`.`orders_coupon`)) ORDER BY `orders`.`orders_id` ASC ;
 
 --
 -- Indexes for dumped tables
@@ -618,8 +706,7 @@ ALTER TABLE `orderaddress`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orders_id`),
   ADD KEY `orders_userId` (`orders_userId`),
-  ADD KEY `orders_coupon` (`orders_coupon`),
-  ADD KEY `orders_addressId` (`orders_addressId`);
+  ADD KEY `orders_coupon` (`orders_coupon`);
 
 --
 -- Indexes for table `strings`
@@ -642,7 +729,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -654,7 +741,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -666,19 +753,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `dilevery`
 --
 ALTER TABLE `dilevery`
-  MODIFY `dilevery_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dilevery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `favorite`
 --
 ALTER TABLE `favorite`
-  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -690,19 +777,19 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notifications_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `notifications_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orderaddress`
 --
 ALTER TABLE `orderaddress`
-  MODIFY `orderAddress_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderAddress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `strings`
@@ -757,8 +844,7 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`orders_userId`) REFERENCES `users` (`users_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`orders_coupon`) REFERENCES `coupon` (`coupon_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`orders_addressId`) REFERENCES `orderaddress` (`orderAddress_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`orders_coupon`) REFERENCES `coupon` (`coupon_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
