@@ -340,12 +340,12 @@ require 'vendor/autoload.php';
 
 function sendFCMMessage($topic, $title, $body,$pageid,$pagename, $imageUrl = null) {
     $projectId = "first-project-c2a07";
-    $serverKey ="server_key.json";
+    // $serverKey ="server_key.json";
     try {
       // Create service account credentials from JSON key file
       $credential = new ServiceAccountCredentials(
         "https://www.googleapis.com/auth/firebase.messaging",
-        json_decode(file_get_contents($serverKey), true)
+        json_decode(file_get_contents(__DIR__ . "/server_key.json"), true)
     );
   
       // Fetch authentication token
