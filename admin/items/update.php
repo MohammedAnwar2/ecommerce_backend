@@ -37,16 +37,16 @@ if ($countData > 0) {
     if (count($notifymedate) != 0 && $count != 0) {
         foreach ($notifymedate as $element) {
             $userid = $element["notifyme_usersid"];
-            insertUsersNotification("warning", "The $name_en are avaliable at this time ", $userid, "users$userid", "", "notifyme", null);
+            insertUsersNotification("Notification", "The $name_en are avaliable at this time ", $userid, "users$userid", "", "notifyme", null);
         }
-        //* delete all the users from "notifyme" table they wanted to notify them when the item avaliable , after sending notification to make attention , and the admin add new count of this item 
-        // deleteData("notifyme", "notifyme_itemsid = $id", false);
-        // $data = array(
-        //     "items_isnotify" => 0,
-        //     "items_active"   => $active,
-        // );
-        // //* update the "isnotify" to 0 in "items" table
-        // updateData("items", $data, "items_id = $id", false);
+        // * delete all the users from "notifyme" table they wanted to notify them when the item avaliable , after sending notification to make attention , and the admin add new count of this item 
+        deleteData("notifyme", "notifyme_itemsid = $id", false);
+        $data = array(
+            "items_isnotify" => 0,
+            "items_active"   => $active,
+        );
+        //* update the "isnotify" to 0 in "items" table
+        updateData("items", $data, "items_id = $id", false);
     }
     echo json_encode(array("status" => "success"));
 } else {
