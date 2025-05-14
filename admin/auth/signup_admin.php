@@ -1,7 +1,7 @@
 <?php
 
 include "../../connect.php";
-$username = filterRequest('username');
+$username = filterRequest('adminName');
 $email = filterRequest('email');
 $phone = filterRequest('phone');
 $password = sha1($_POST['password']);
