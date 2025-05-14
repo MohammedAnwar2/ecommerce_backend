@@ -26,7 +26,7 @@ $data = array(
 );
 
 if ($imagename == "empty" || $imagename == "fail") {
-    echo json_encode(array("status" => "failure"));
+    echo json_encode(array("status" => "failure to upload image"));
 } else {
     $data["items_image"] = $imagename;
     insertData("items", $data);
