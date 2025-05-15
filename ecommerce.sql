@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2025 at 03:33 PM
+-- Generation Time: May 15, 2025 at 05:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,6 +62,13 @@ CREATE TABLE `admin` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_email`, `admin_phone`, `admin_password`, `admin_verifycode`, `admin_approve`, `created_at`) VALUES
+(1, 'mohammed anwar', 'moanbm123@gmail.com', '7725551277', '6367c48dd193d56ea7b0baad25b19455e529f5ee', '88463', 1, '2025-05-14 02:43:59');
+
 -- --------------------------------------------------------
 
 --
@@ -109,27 +116,15 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `cart_usersId`, `cart_itemsId`, `cart_itemprice`, `created_at`, `cart_orders`) VALUES
-(34, 5, 1, 1000.00, '2025-05-13 05:08:55', 24),
-(35, 5, 1, 1000.00, '2025-05-13 05:08:55', 24),
-(36, 5, 1, 1000.00, '2025-05-13 05:08:55', 24),
-(37, 5, 1, 1000.00, '2025-05-13 05:08:56', 24),
-(38, 5, 1, 1000.00, '2025-05-13 05:08:56', 24),
-(39, 5, 1, 1000.00, '2025-05-13 05:08:56', 24),
-(40, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
-(41, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
-(42, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
-(43, 5, 1, 1000.00, '2025-05-13 05:13:04', 25),
-(44, 5, 1, 1000.00, '2025-05-13 05:19:38', 27),
-(45, 5, 1, 1000.00, '2025-05-13 05:23:00', 28),
-(46, 5, 1, 1000.00, '2025-05-13 05:23:01', 28),
-(47, 5, 1, 1000.00, '2025-05-13 05:23:01', 28),
-(48, 5, 1, 1000.00, '2025-05-13 05:27:28', 29),
-(49, 5, 1, 1000.00, '2025-05-13 05:27:28', 29),
-(50, 5, 1, 1000.00, '2025-05-13 05:27:28', 29),
-(51, 5, 1, 1000.00, '2025-05-13 05:41:14', 30),
-(52, 5, 1, 1000.00, '2025-05-13 05:41:14', 30),
-(53, 5, 1, 1000.00, '2025-05-13 05:41:14', 30),
-(54, 5, 1, 1000.00, '2025-05-13 05:41:15', 30);
+(55, 5, 9, 98.00, '2025-05-14 12:48:11', 31),
+(56, 5, 9, 98.00, '2025-05-14 12:48:12', 31),
+(57, 5, 9, 98.00, '2025-05-14 12:48:12', 31),
+(58, 5, 9, 98.00, '2025-05-15 06:32:20', 32),
+(59, 5, 9, 98.00, '2025-05-15 06:34:09', 32),
+(60, 5, 9, 98.00, '2025-05-15 06:41:15', 32),
+(61, 5, 9, 98.00, '2025-05-15 06:41:15', 32),
+(62, 5, 10, -890.01, '2025-05-15 14:06:58', 33),
+(63, 5, 10, -890.01, '2025-05-15 14:06:58', 33);
 
 -- --------------------------------------------------------
 
@@ -171,15 +166,16 @@ CREATE TABLE `categories` (
   `categories_id` int(11) UNSIGNED NOT NULL,
   `categories_name` varchar(255) NOT NULL,
   `categories_name_ar` varchar(255) NOT NULL,
-  `categories_image` varchar(255) DEFAULT NULL
+  `categories_image` varchar(255) DEFAULT NULL,
+  `categories_datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`categories_id`, `categories_name`, `categories_name_ar`, `categories_image`) VALUES
-(1, 'gdfg', 'dgdf', 'mobile.svg');
+INSERT INTO `categories` (`categories_id`, `categories_name`, `categories_name_ar`, `categories_image`, `categories_datetime`) VALUES
+(2, '1حذاء', 'shows ', '8473shoes-4-svgrepo-com.svg', '2025-05-14 03:05:59');
 
 -- --------------------------------------------------------
 
@@ -308,7 +304,8 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`items_id`, `items_name`, `items_name_ar`, `items_desc`, `items_desc_ar`, `items_count`, `items_active`, `items_price`, `items_discount`, `items_image`, `items_isnotify`, `items_date`, `items_cat`) VALUES
-(1, 'fdgfdg', 'fgfdgfd', 'fdsgfg', 'dsfgfgdf', 8990, 1, 1000.00, 0.00, 'dress.png', 0, '2025-05-12 11:18:59', 1);
+(9, 'وةة', 'ةةةة', 'ةةة', 'ةةة', 992, 1, 98.00, 0.00, '7034images (14).jpeg', 0, '2025-05-14 18:16:01', 2),
+(10, 'ظظظظظظ', 'ةظظظظظة', 'ظظظم', 'ظظظ', 997, 1, 99.00, 999.00, '1861images (15).jpeg', 0, '2025-05-14 18:16:36', 2);
 
 -- --------------------------------------------------------
 
@@ -387,7 +384,40 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`notifications_id`, `notifications_title`, `notifications_body`, `notifications_usersid`, `notifications_admin`, `notifications_datetime`) VALUES
-(1, 'Warning', 'The order number 30 is waiting to approve ', NULL, 1, '2025-05-13 11:11:43');
+(31, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-14 18:36:33'),
+(32, 'Successfully', 'The order number 31 has been approved', NULL, 1, '2025-05-14 18:36:35'),
+(33, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-14 18:38:11'),
+(34, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-14 18:40:11'),
+(35, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-14 18:41:47'),
+(36, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-14 18:42:56'),
+(37, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-14 18:44:25'),
+(38, 'Successfully', 'Your Order On The Way', 5, NULL, '2025-05-14 21:16:54'),
+(39, 'Successfully', 'The Order number 31 is recived by the delivery man 1', NULL, 1, '2025-05-14 21:16:59'),
+(40, 'Warning', 'The order number 32 is waiting to approve ', NULL, 1, '2025-05-15 12:11:26'),
+(41, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-15 12:12:55'),
+(42, 'Successfully', 'The order number 32 has been approved', NULL, 1, '2025-05-15 12:12:59'),
+(43, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-15 12:14:49'),
+(44, 'Successfully', 'Your Order On The Way', 5, NULL, '2025-05-15 12:15:35'),
+(45, 'Successfully', 'The Order number 32 is recived by the delivery man 1', NULL, 1, '2025-05-15 12:15:41'),
+(46, 'Successfully', 'The Order has been delivered', 5, NULL, '2025-05-15 12:26:37'),
+(47, 'Successfully', 'The Order number 31 has been delivered to the customer', NULL, 1, '2025-05-15 12:26:39'),
+(48, 'Successfully', 'The Order has been delivered', 5, NULL, '2025-05-15 19:34:45'),
+(49, 'Successfully', 'The Order number 32 has been delivered to the customer', NULL, 1, '2025-05-15 19:34:48'),
+(50, 'Warning', 'The order number 33 is waiting to approve ', NULL, 1, '2025-05-15 19:37:09'),
+(51, 'Successfully', 'The order has been approved', 5, NULL, '2025-05-15 20:27:35'),
+(52, 'Successfully', 'The order number 33 has been approved', NULL, 1, '2025-05-15 20:27:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifyme`
+--
+
+CREATE TABLE `notifyme` (
+  `notifyme_id` int(11) NOT NULL,
+  `notifyme_itemsid` int(11) NOT NULL,
+  `notifyme_usersid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -415,7 +445,9 @@ INSERT INTO `orderaddress` (`orderAddress_id`, `orderAddress_name`, `orderAddres
 (2, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 26, 1),
 (3, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 27, 1),
 (4, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 28, 1),
-(5, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 30, 1);
+(5, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 30, 1),
+(6, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 31, 1),
+(7, 'dooriyan', 'Bangalore ', 'Main street ', '13.14494000', '77.57451170', 32, 1);
 
 -- --------------------------------------------------------
 
@@ -455,11 +487,11 @@ CREATE TABLE `orderdetailsview` (
 
 CREATE TABLE `orders` (
   `orders_id` int(11) NOT NULL,
-  `orders_paymentmethod` varchar(50) NOT NULL,
+  `orders_paymentmethod` varchar(50) NOT NULL COMMENT 'cach=0 , card=1',
   `orders_userId` int(11) NOT NULL,
   `orders_deliveryid` tinyint(4) NOT NULL DEFAULT 0,
   `orders_addressId` int(11) NOT NULL DEFAULT 0,
-  `orders_type` varchar(50) DEFAULT NULL,
+  `orders_type` varchar(50) DEFAULT NULL COMMENT 'delivery=0 , store=1',
   `orders_pricedelivery` decimal(10,2) DEFAULT 0.00,
   `orders_price` decimal(10,2) NOT NULL,
   `orders_totalprice` decimal(10,2) NOT NULL,
@@ -475,8 +507,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`orders_id`, `orders_paymentmethod`, `orders_userId`, `orders_deliveryid`, `orders_addressId`, `orders_type`, `orders_pricedelivery`, `orders_price`, `orders_totalprice`, `orders_coupon`, `orders_status`, `orders_rating`, `orders_noteRating`, `orders_date`) VALUES
-(28, '0', 5, 0, 1, '0', 30.00, 3000.00, 3030.00, 1, 0, 0, 'none', '2025-05-13 05:23:05'),
-(30, '0', 5, 0, 1, '0', 30.00, 4000.00, 4030.00, 1, 0, 0, 'none', '2025-05-13 05:41:19');
+(32, '0', 5, 1, 1, '0', 30.00, 392.00, 422.00, 1, 4, 5, 'tfggggh', '2025-05-15 06:41:26'),
+(33, '0', 5, 0, 0, '1', 0.00, -1780.02, -1780.02, 1, 4, 4, '', '2025-05-15 14:07:09');
 
 -- --------------------------------------------------------
 
@@ -488,6 +520,7 @@ CREATE TABLE `ordersview` (
 `orders_id` int(11)
 ,`orders_paymentmethod` varchar(50)
 ,`orders_userId` int(11)
+,`orders_deliveryid` tinyint(4)
 ,`orders_addressId` int(11)
 ,`orders_type` varchar(50)
 ,`orders_pricedelivery` decimal(10,2)
@@ -625,7 +658,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ordersview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ordersview`  AS SELECT `orders`.`orders_id` AS `orders_id`, `orders`.`orders_paymentmethod` AS `orders_paymentmethod`, `orders`.`orders_userId` AS `orders_userId`, `orders`.`orders_addressId` AS `orders_addressId`, `orders`.`orders_type` AS `orders_type`, `orders`.`orders_pricedelivery` AS `orders_pricedelivery`, `orders`.`orders_price` AS `orders_price`, `orders`.`orders_totalprice` AS `orders_totalprice`, `orders`.`orders_coupon` AS `orders_coupon`, `orders`.`orders_status` AS `orders_status`, `orders`.`orders_rating` AS `orders_rating`, `orders`.`orders_noteRating` AS `orders_noteRating`, `orders`.`orders_date` AS `orders_date`, `orderaddress`.`orderAddress_id` AS `orderAddress_id`, `orderaddress`.`orderAddress_name` AS `orderAddress_name`, `orderaddress`.`orderAddress_city` AS `orderAddress_city`, `orderaddress`.`orderAddress_street` AS `orderAddress_street`, `orderaddress`.`orderAddress_lat` AS `orderAddress_lat`, `orderaddress`.`orderAddress_long` AS `orderAddress_long`, `orderaddress`.`orderAddress_orderId` AS `orderAddress_orderId`, `orderaddress`.`orderAddress_addressId` AS `orderAddress_addressId`, `coupon`.`coupon_discount` AS `coupon_discount` FROM ((`orders` left join `orderaddress` on(`orders`.`orders_id` = `orderaddress`.`orderAddress_orderId`)) left join `coupon` on(`coupon`.`coupon_id` = `orders`.`orders_coupon`)) ORDER BY `orders`.`orders_id` ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ordersview`  AS SELECT `orders`.`orders_id` AS `orders_id`, `orders`.`orders_paymentmethod` AS `orders_paymentmethod`, `orders`.`orders_userId` AS `orders_userId`, `orders`.`orders_deliveryid` AS `orders_deliveryid`, `orders`.`orders_addressId` AS `orders_addressId`, `orders`.`orders_type` AS `orders_type`, `orders`.`orders_pricedelivery` AS `orders_pricedelivery`, `orders`.`orders_price` AS `orders_price`, `orders`.`orders_totalprice` AS `orders_totalprice`, `orders`.`orders_coupon` AS `orders_coupon`, `orders`.`orders_status` AS `orders_status`, `orders`.`orders_rating` AS `orders_rating`, `orders`.`orders_noteRating` AS `orders_noteRating`, `orders`.`orders_date` AS `orders_date`, `orderaddress`.`orderAddress_id` AS `orderAddress_id`, `orderaddress`.`orderAddress_name` AS `orderAddress_name`, `orderaddress`.`orderAddress_city` AS `orderAddress_city`, `orderaddress`.`orderAddress_street` AS `orderAddress_street`, `orderaddress`.`orderAddress_lat` AS `orderAddress_lat`, `orderaddress`.`orderAddress_long` AS `orderAddress_long`, `orderaddress`.`orderAddress_orderId` AS `orderAddress_orderId`, `orderaddress`.`orderAddress_addressId` AS `orderAddress_addressId`, `coupon`.`coupon_discount` AS `coupon_discount` FROM ((`orders` left join `orderaddress` on(`orders`.`orders_id` = `orderaddress`.`orderAddress_orderId`)) left join `coupon` on(`coupon`.`coupon_id` = `orders`.`orders_coupon`)) ORDER BY `orders`.`orders_id` ASC ;
 
 --
 -- Indexes for dumped tables
@@ -695,6 +728,14 @@ ALTER TABLE `notifications`
   ADD KEY `notifications_usersid` (`notifications_usersid`);
 
 --
+-- Indexes for table `notifyme`
+--
+ALTER TABLE `notifyme`
+  ADD PRIMARY KEY (`notifyme_id`),
+  ADD KEY `notifyme_itemsid` (`notifyme_itemsid`),
+  ADD KEY `notifyme_usersid` (`notifyme_usersid`);
+
+--
 -- Indexes for table `orderaddress`
 --
 ALTER TABLE `orderaddress`
@@ -735,19 +776,19 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categories_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `categories_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `coupon`
@@ -765,31 +806,37 @@ ALTER TABLE `dilevery`
 -- AUTO_INCREMENT for table `favorite`
 --
 ALTER TABLE `favorite`
-  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `items_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `items_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notifications_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `notifications_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `notifyme`
+--
+ALTER TABLE `notifyme`
+  MODIFY `notifyme_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orderaddress`
 --
 ALTER TABLE `orderaddress`
-  MODIFY `orderAddress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `orderAddress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `strings`
@@ -838,6 +885,13 @@ ALTER TABLE `items`
 --
 ALTER TABLE `notifications`
   ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`notifications_usersid`) REFERENCES `users` (`users_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `notifyme`
+--
+ALTER TABLE `notifyme`
+  ADD CONSTRAINT `notifyme_ibfk_1` FOREIGN KEY (`notifyme_itemsid`) REFERENCES `items` (`items_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notifyme_ibfk_2` FOREIGN KEY (`notifyme_usersid`) REFERENCES `users` (`users_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
