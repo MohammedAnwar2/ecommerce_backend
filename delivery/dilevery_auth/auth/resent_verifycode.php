@@ -1,6 +1,8 @@
 <?php
 
 include "../../../connect.php";
+use Services\Mail\SendMail;
+
 $email = filterRequest('email');
 $verifycode = rand(10000,99999);
 
@@ -12,7 +14,7 @@ if($count>0){
         "dilevery_verifycode"=>$verifycode
     );
     updateData("dilevery",$data,"`dilevery_email`='$email'");
-    // sendEmail($email,"Verify Code Ecommerce",$verifycode);
+    SendMail::sendOtpEmail($email, "Verify Code of Ecommerce App", $verifycode);
 }else{
     printFailure();
 }

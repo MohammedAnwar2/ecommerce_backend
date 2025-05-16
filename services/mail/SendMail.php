@@ -33,10 +33,6 @@ class SendMail
             &copy; ' . date('Y') . ' Your Ecommerce. All rights reserved.
         </p>
     </div>';
-        if ($mailService->sendPhpMailer($to, $subject, $body, $otpCode)) {
-            echo 'Email sent successfully.';
-        } else {
-            echo 'Failed to send email.';
-        }
+        $mailService->sendPhpMailer($to, $subject, $body, $otpCode);
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 include "../../connect.php";
+use Services\Mail\SendMail;
+
 $username = filterRequest('username');
 $email = filterRequest('email');
 $phone = filterRequest('phone');
@@ -24,4 +26,5 @@ if($count>0){
     );
     insertData("dilevery",$data);
     // sendEmail($email,"Verify Code Ecommerce",$verifycode);
+    SendMail::sendOtpEmail($email, "Verify Code of Ecommerce App", $verifycode);
 }
