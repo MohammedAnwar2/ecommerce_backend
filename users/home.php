@@ -5,6 +5,7 @@ $allData = array();
 $allData['status'] = 'success';
 $allData['categories'] = getAllData("categories",null,null,false);
 $allData['strings'] = getAllData("strings",null,null,false);
+$allData['ads'] = getAllData("ads",null,null,false);
 if(count($allData['categories'])==0)
 {
     $allData['status']="failure";
